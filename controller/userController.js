@@ -6,7 +6,7 @@ const JWT_SECRET = 'your_jwt_secret';
 // 1. Save Form Data
 exports.saveFormData = async (req, res) => {
   const { name, mobile, referralCode, gender, technology, dob } = req.body;
-  const profilePic = req.files.map((file) => file.path).join(','); // Save file paths as comma-separated string
+  const profilePic = req.files.map((file) => file.path).join(',');
 
   try {
     let points = 0;
@@ -14,7 +14,7 @@ exports.saveFormData = async (req, res) => {
       const referredUser = await User.findOne({ where: { referralCode } });
       if (referredUser) {
         points = 10;
-        referredUser.points += 20; // Referral user gets 20 points
+        referredUser.points += 20;
         await referredUser.save();
       }
     }
